@@ -77,5 +77,17 @@ include 'nats-streaming'
 
 include 'test-harness'
 
+//rootProject.children.each {it.name="conductor-${it.name}"}
+include 'dell-specific'
+include 'dell-specific:mongo-persistence'
+//findProject(':dell-specific:mongo-persistence')?.name = 'mongo-persistence'
 
-rootProject.children.each {it.name="conductor-${it.name}"}
+rootProject.children.stream()
+        .filter(p -> p.name.equals("dell-specific"))
+        .forEach(it -> it.children
+                .forEach(c -> c.name = "conductor-" + c.name))
+
+rootProject.children.stream()
+        .filter(p -> !p.name.equals("dell-specific"))
+        .forEach(it -> it.name = "conductor-" + it.name)
+

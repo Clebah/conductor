@@ -1,0 +1,27 @@
+dependencies {
+    implementation project(':conductor-common')
+    implementation project(':conductor-core')
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    // SBMTODO: remove guava dep
+    implementation "com.google.guava:guava:${revGuava}"
+
+    implementation "com.fasterxml.jackson.core:jackson-databind"
+    implementation "com.fasterxml.jackson.core:jackson-core"
+
+    implementation "org.apache.commons:commons-lang3"
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.projectlombok:lombok:${revLombok}"
+
+    testImplementation "org.testcontainers:mongodb:${revTestContainer}"
+    testImplementation "org.testinfected.hamcrest-matchers:all-matchers:${revHamcrestAllMatchers}"
+
+    testImplementation project(':conductor-core').sourceSets.test.output
+    testImplementation project(':conductor-common').sourceSets.test.output
+}
+
+test {
+    //the SQL unit tests must run within the same JVM to share the same embedded DB
+    maxParallelForks = 1
+}

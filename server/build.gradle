@@ -37,6 +37,7 @@ dependencies {
     implementation project(':conductor-cassandra-persistence')
     implementation project(':conductor-postgres-persistence')
     implementation project(':conductor-mysql-persistence')
+    implementation project(':dell-specific:conductor-mongo-persistence')
 
     //Indexing (note: Elasticsearch 6 is deprecated)
     implementation project(':conductor-es7-persistence')
@@ -56,6 +57,10 @@ dependencies {
     //Event Listener
     implementation project(':conductor-workflow-event-listener')
 
+
+    // Spring Cloud Starters
+    implementation("org.springframework.cloud:spring-cloud-starter-config:3.1.0")
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap:3.1.0")
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
